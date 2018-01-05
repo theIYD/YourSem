@@ -11,6 +11,7 @@ const hbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const session = require('express-session');
+const passport = require('passport');
 const flash = require('connect-flash');
 const methodOverride = require('method-override');
 const app = express();
@@ -41,6 +42,11 @@ app.use(session({
     resave: false,
     saveUninitialized: true
 }));
+
+//Passport Middleware
+require('./config/passport')(passport);
+app.use(passport.initialize());
+app.use(passport.session());
 
 //Connect flash middleware
 app.use(flash());

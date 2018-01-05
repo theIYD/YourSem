@@ -18,6 +18,7 @@ const app = express();
 //Routes
 const semesters = require('./routes/semesters');
 const marks = require('./routes/marks');
+const users = require('./routes/users');
 
 //Mongoose middleware
 mongoose.connect('mongodb://localhost/your_sem');
@@ -75,5 +76,6 @@ app.get('/', (req, res) => {
 
 //Bring in all routes
 app.use('/semesters', semesters);
-app.use('/marks', marks)
+app.use('/marks', marks);
+app.use('/users', users);
 

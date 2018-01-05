@@ -1,0 +1,17 @@
+:root {
+    --black: #000000;
+    --white: #ffffff;
+}
+
+.semester_title {
+    outline: none;
+    text-decoration: none;
+    color: var(--black);
+}
+
+.semester_title:hover {
+    outline: none;
+    border: none;
+    text-decoration: underline;
+    color: var(--black);
+}

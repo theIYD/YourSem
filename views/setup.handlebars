@@ -1,19 +1,17 @@
-<h1>Setup</h1>
+<h4 class="h4">Add Semester</h4>
 
-<div class="container">
-    <form method="post" action="/add_semester/initialize">
-        <div id="form-wrap" class="form-control">
-            <label for="college_name">Name of your college: </label>
-            <input id="college_name" type="text" class="form-control" name="collegeName" placeholder="College Name" required>
-            <label for="sem_number" class="mt-2">Semester No:</label>
-            <input id="sem_number" type="number" class="form-control mb-2" name="semNumber" placeholder="Sem number" required>
+<form method="post" action="/add_semester/initialize">
+    <div id="form-wrap" class="form-control">
+        <label for="college_name">Name of your college: </label>
+        <input id="college_name" type="text" class="form-control" name="collegeName" placeholder="College Name" required>
+        <label for="sem_number" class="mt-2">Semester No:</label>
+        <input id="sem_number" type="number" class="form-control mb-2" name="semNumber" placeholder="Sem number" required>
 
-            <div class="form-row"></div>
-            <div class="wrap-buttons">
-                <button id="addSubjBtn" class="btn btn-default" name="addSubjects">Add Subject</button>
-                <input type="submit" class="btn btn-primary" value="Submit">
-            </div>
-
+        <div class="form-row"></div>
+        <div class="wrap-buttons">
+            <button id="addSubjBtn" class="btn btn-default" name="addSubjects">Add Subject</button>
+            <input type="submit" class="btn btn-primary" value="Submit">
         </div>
-    </form>
-</div>
+
+    </div>
+</form>

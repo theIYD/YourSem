@@ -1,3 +1,4 @@
+//Document is ready ...
 window.onload = () => {
     if (document.querySelector('#form-wrap')) {
         const add_subj_btn = document.querySelector('#addSubjBtn');
@@ -15,6 +16,7 @@ window.onload = () => {
             newLabel.innerHTML = 'Subjects';
             newLabel.className = 'subj_label';
 
+            //Create input fields according to the button clicks.
             const newdiv = document.createElement('div');
             newdiv.className = 'col';
             newdiv.innerHTML = `<input id="subj_${count}" type='text' class="form-control mb-2 sub" name="subject" placeholder="Subject ${count}">`;
@@ -25,20 +27,6 @@ window.onload = () => {
             document.querySelector('.form-row').appendChild(newdiv);
             count_input.value = count;
             count++;
-        });
-    }
-
-    if (document.querySelector('.marks_form')) {
-        document.querySelector('.marks_form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const obtained = document.querySelector('.obtained').value;
-            const maximum = document.querySelector('.maximum').value;
-
-            console.log(obtained, maximum)
-            if (maximum < obtained) {
-                console.log('Maximum Marks cannot be less than the obtained marks.');
-                document.querySelector('.marks_form').reset();
-            }
         });
     }
 }

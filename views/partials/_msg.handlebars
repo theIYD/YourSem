@@ -1,0 +1,17 @@
+{{#if successMsg}}
+<div class="alert alert-success alert-dismissible fade show mt-2">
+    <h4 class="">{{successMsg}}</h4>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{{/if}}
+
+{{#if errorMsg}}
+<div class="alert alert-danger alert-dismissible fade show mt-2">
+    <h4 class="">{{errorMsg}}</h4>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{{/if}}

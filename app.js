@@ -10,6 +10,8 @@ const path = require('path');
 const hbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const session = require('express-session');
+const flash = require('connect-flash');
 const methodOverride = require('method-override');
 const app = express();
 
@@ -33,6 +35,21 @@ app.engine('handlebars', hbs({
     defaultLayout: 'main'
 }));
 app.set('view engine', 'handlebars');
+
+//Express session middleware
+app.use(session({
+    secret: 'secret',
+    resave: false,
+    saveUninitialized: true
+}));
+
+//Connect flash middleware
+app.use(flash());
+app.use((req, res, next) => {
+    res.locals.successMsg = req.flash('successMsg');
+    res.locals.errorMsg = req.flash('errorMsg');
+    next();
+});
 
 // Set Client Folder
 app.use(express.static(path.join(__dirname, 'client')));
@@ -98,6 +115,7 @@ app.put('/edit_marks/semester_number=:number/:id', (req, res) => {
 
         updated_marks.save()
         .then(updated_marks => {
+            req.flash('successMsg', 'Marks updated');
             res.redirect('/semesters');
         });
     });
@@ -156,5 +174,8 @@ app.post('/add_marks/semester_number=:number/:id', (req, res) =>{
 
     new M_MARKS(subjMarks)
         .save()
-        .then(marks => res.redirect('/'));
+        .then(marks => {
+            req.flash('successMsg', 'Marks have been added successfully')
+            res.redirect('/');
+        });
 });

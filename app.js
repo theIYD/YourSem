@@ -15,11 +15,9 @@ const flash = require('connect-flash');
 const methodOverride = require('method-override');
 const app = express();
 
-//Bring in Models
-require('./models/Setup');
-require('./models/Marks');
-const M_MARKS = mongoose.model('MarksModel')
-const M_SETUP = mongoose.model('SetupModel');
+//Routes
+const semesters = require('./routes/semesters');
+const marks = require('./routes/marks');
 
 //Mongoose middleware
 mongoose.connect('mongodb://localhost/your_sem');
@@ -75,107 +73,7 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
-//Setup the semester
-app.get('/add_semester', (req, res) => {
-    res.render('setup');
-});
+//Bring in all routes
+app.use('/semesters', semesters);
+app.use('/marks', marks)
 
-//Show the marks
-app.get('/semesters/show_marks/semester_number=:number/:id', (req, res) => {
-    M_MARKS.findOne({
-        semester_number: req.params.number
-    })
-    .then(eachSubjectMarks => {
-        res.render('semesters/details', {
-            details: eachSubjectMarks
-        });
-    });
-});
-
-//Edit marks route
-app.get('/edit_marks/semester_number=:number/:id', (req, res) => {
-    M_MARKS.findOne({
-        semester_number: req.params.number
-    })
-    .then(eachSubMarks => {
-        res.render('marks/edit', {
-            marksToBeEdited: eachSubMarks
-        });
-    });
-});
-
-//Update the marks
-app.put('/edit_marks/semester_number=:number/:id', (req, res) => {
-    M_MARKS.findOne({
-        semester_number: req.params.number
-    })
-    .then(updated_marks => {
-        updated_marks.obtained_marks = req.body.subj_obtained_marks;
-        updated_marks.maximum_marks = req.body.subj_max_marks;
-
-        updated_marks.save()
-        .then(updated_marks => {
-            req.flash('successMsg', 'Marks updated');
-            res.redirect('/semesters');
-        });
-    });
-});
-
-//Display all the semesters
-app.get('/semesters/', (req, res) => {
-    M_SETUP.find({})
-        .sort({
-            date: 'desc'
-        })
-        .then(eachSem => {
-            res.render('semesters/semester', {
-                eachSem: eachSem
-            });
-        });
-});
-
-//Add the college name and semester
-app.post('/add_semester/initialize', (req, res) => {
-    //console.log(req.body);
-    const newSemester = {
-        college_name: req.body.collegeName,
-        sem_number: req.body.semNumber,
-        subjects: req.body.subject,
-        subjectCount: req.body.subject_count
-    };
-
-    new M_SETUP(newSemester)
-        .save()
-        .then(setup => res.redirect('/'));
-});
-
-//Enter semester marks
-app.get('/add_marks/:id', (req, res) => {
-    M_SETUP.findOne({
-        _id: req.params.id
-    })
-    .then(sem => {
-        console.log(sem)
-        res.render('marks/add_marks', {
-            sem: sem
-        });
-    });
-});
-
-//Post the entered marks to database.
-app.post('/add_marks/semester_number=:number/:id', (req, res) =>{
-    //console.log(req.body);
-    const subjMarks = {
-        semester_number: req.params.number,
-        subject_name: req.body.subjName,
-        obtained_marks: req.body.subj_obtained_marks,
-        maximum_marks: req.body.subj_max_marks
-    };
-
-    new M_MARKS(subjMarks)
-        .save()
-        .then(marks => {
-            req.flash('successMsg', 'Marks have been added successfully')
-            res.redirect('/');
-        });
-});

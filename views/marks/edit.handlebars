@@ -1,0 +1,30 @@
+<div class="card card-body">
+    <h3>Edit Marks</h3>
+    <form class="marks_form" action="/edit_marks/semester_number={{marksToBeEdited.semester_number}}/{{marksToBeEdited.id}}?_method=PUT" method="POST">
+    <input type="hidden" name="_method" value="PUT">
+        <div class="table-responsive">
+            <table class="table table-bordered mt-4">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Subject</th>
+                    <th scope="col">Obtained Marks</th>
+                    <th scope="col">Maximum Marks</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each marksToBeEdited}}
+                {{#each subject_name}}
+                <tr>
+                    <th scope="row" name="{{this}}">{{this}}</th>
+                    <input type="hidden" name="subjName" value="{{this}}">
+                    <td><input type="number" class="form-control obtained" required name="subj_obtained_marks" value="{{#with (lookup ../obtained_marks @index)}}{{this}}{{/with}}"></td>
+                    <td><input type="number" class="form-control maximum" required name="subj_max_marks" value="{{#with (lookup ../maximum_marks @index)}}{{this}}{{/with}}"></td>
+                </tr>
+                {{/each}}
+                {{/each}}
+            </tbody>
+        </table>
+        <input type="submit" class="btn btn-primary" value="Submit Marks">
+        </div>
+    </form>
+</div>

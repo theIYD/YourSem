@@ -1,0 +1,36 @@
+<div class="table-responsive">
+    <table class="table table-bordered mt-4">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Semester</th>
+                <th scope="col">Subject</th>
+                <th scope="col">Obtained Marks</th>
+                <th scope="col">Maximum Marks</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            {{#each details}} 
+                {{#each subject_name}}
+                <tr>
+                    <th scope="row" name="{{semester_number}}">{{../semester_number}}</th>
+                    <td>{{this}}</td>
+                    <td>
+                        {{#with (lookup ../obtained_marks @index)}}
+                            {{this}}
+                        {{/with}}
+                    </td>
+                    <td>
+                        {{#with (lookup ../maximum_marks @index)}}
+                            {{this}}
+                        {{/with}}
+                    </td>
+                </tr>
+            {{/each}}
+                
+            {{/each}}
+
+
+        </tbody>
+    </table>
+</div>

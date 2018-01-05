@@ -23,7 +23,7 @@ router.get('/show_marks/semester_number=:number/:id', (req, res) => {
 
 //Setup the semester
 router.get('/add_semester', (req, res) => {
-    res.render('setup');
+    res.render('semesters/add_semester');
 });
 
 //Display all the semesters

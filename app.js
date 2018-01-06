@@ -14,6 +14,7 @@ const session = require('express-session');
 const passport = require('passport');
 const flash = require('connect-flash');
 const methodOverride = require('method-override');
+const {ensureAuthenticated} = require('./helpers/auth');
 const app = express();
 
 //Routes
@@ -83,6 +84,10 @@ app.listen(port, (req, res) => {
 app.get('/', (req, res) => {
     res.render('index');
 });
+
+app.get('/welcome', ensureAuthenticated, (req, res) => {
+    res.render('welcome')
+})
 
 //Bring in all routes
 app.use('/semesters', semesters);

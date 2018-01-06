@@ -8,10 +8,10 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
             <a class="navbar-brand" href="/">Your Sem</a>
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Home</a>
-                </li>
                 {{#if user}}
+                <li class="nav-item">
+                    <a class="nav-link" href="/welcome">Home</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/semesters/add_semester">Add Semester</a>
                 </li>
@@ -19,8 +19,11 @@
                     <a class="nav-link" href="/semesters">Your Semesters</a>
                 </li>
             </ul>
-            {{else}}
             <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/logout">Log out</a>
+                </li>
+                {{else}}
                 <li class="nav-item">
                     <a class="nav-link" href="/users/login">Login</a>
                 </li>

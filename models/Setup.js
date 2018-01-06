@@ -16,6 +16,10 @@ let setupModel = mongoose.Schema({
     subject_count: {
         type: Number
     },
+    user: {
+        type: String,
+        required: true
+    },
     date: {
         type: Date,
         default: Date.now

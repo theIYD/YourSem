@@ -16,6 +16,10 @@ let marksModel = mongoose.Schema({
     maximum_marks: {
         type: [Number],
         required: true
+    },
+    user: {
+        type: String,
+        required: true
     }
 });
 

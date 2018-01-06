@@ -11,6 +11,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/">Home</a>
                 </li>
+                {{#if user}}
                 <li class="nav-item">
                     <a class="nav-link" href="/semesters/add_semester">Add Semester</a>
                 </li>
@@ -18,10 +19,16 @@
                     <a class="nav-link" href="/semesters">Your Semesters</a>
                 </li>
             </ul>
+            {{else}}
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a class="nav-link" href="/users/login">Login</a></li>
-                <li class="nav-item"><a class="nav-link" href="/users/register">Register</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/register">Register</a>
+                </li>
             </ul>
+            {{/if}}
         </div>
     </div>
 

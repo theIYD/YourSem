@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const async = require('async');
 
 //Bring in models
 require('../models/Marks');
@@ -27,7 +28,15 @@ router.get('/add_semester', (req, res) => {
 });
 
 //Display all the semesters
-router.get('/', (req, res) => {
+router.get('/', (req, res, next) => {
+
+    M_MARKS.find({}, {obtained_marks: true, maximum_marks: true})
+        .then(result => {
+            if(result) {
+                res.locals.result = result;
+            }
+        });
+
     M_SETUP.find({})
         .sort({
             date: 'desc'

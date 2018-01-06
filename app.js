@@ -50,9 +50,13 @@ app.use(passport.session());
 
 //Connect flash middleware
 app.use(flash());
+
+//Global variables
 app.use((req, res, next) => {
+    res.locals.user = req.user || null;
     res.locals.successMsg = req.flash('successMsg');
     res.locals.errorMsg = req.flash('errorMsg');
+    res.locals.result = req.result || null;
     next();
 });
 

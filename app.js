@@ -86,7 +86,9 @@ app.get('/', (req, res) => {
 });
 
 app.get('/welcome', ensureAuthenticated, (req, res) => {
-    res.render('welcome')
+    res.render('welcome', {
+        userName: req.user.name
+    });
 })
 
 //Bring in all routes

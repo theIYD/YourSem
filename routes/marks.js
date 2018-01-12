@@ -41,7 +41,7 @@ router.put('/edit_marks/semester_number=:number/:id', ensureAuthenticated, (req,
 
             updated_marks.save()
                 .then(updated_marks => {
-                    req.flash('errorMsg', 'Marks updated');
+                    req.flash('successMsg', 'Marks updated');
                     res.redirect('/semesters');
                 });
         });
